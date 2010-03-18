@@ -4,6 +4,4 @@ class List {
   public boolean empty() {
     return begin == null;
   }
-
-  
 }

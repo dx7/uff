@@ -1,9 +1,65 @@
 class LispLike {
   
   public static void main(String[] args) {
-    // No a = cons(13, cons(26, cons(39, null)));
-    // No b = cons(15, cons(13, cons(25, null)));
-    // System.out.println(item);
+    No a = cons(13, cons(26, cons(39, null)));
+    No b = cons(15, cons(13, cons(25, null)));
+    No c = null;
+    No d = cons(13, cons(25, null));
+    No e = cons(13, a);
+   
+    System.out.println("a: " + a);
+    System.out.println("b: " + b);
+    System.out.println("c: " + c);
+    System.out.println("d: " + d);
+    System.out.println("e: " + e);
+    System.out.println("a união b: " + uniao(a, b));
+    System.out.println("26 pertence a a? " + pertence(26, a));
+    System.out.println("26 pertence a b? " + pertence(26, b));
+    System.out.println("a intersecao b: " + intersecao(a, b));
+    System.out.println("a - b: " + diferenca(a, b));
+    System.out.println("b - a: " + diferenca(b, a));
+    System.out.println("a ordenado: " + ordena(a));
+    System.out.println("b ordenado: " + ordena(b));
+    System.out.println("insere 10 no final de a: " + insereNoFinal(10, a));
+    System.out.println("inserir 10 em a: " + insere(10, a));
+    System.out.println("inserir 20 em b: " + insere(20, b));
+    System.out.println("somatório de a: " + soma(a));
+    System.out.println("somatório de b: " + soma(b));
+    System.out.println("tamanho a: " + tamanho(a));
+    System.out.println("tamanho b: " + tamanho(b));
+    System.out.println("a contem c: " + contem(a, c));
+    System.out.println("a contem d: " + contem(a, d));
+    System.out.println("b contem d: " + contem(b, d));
+    System.out.println("a = a: " + iguais(a, a));
+    System.out.println("a = b: " + iguais(a, b));
+    System.out.println("inverte a: " + inverte(a));
+    System.out.println("remove todos 13 de e: " + removeTodas(13, e));
+    System.out.println("impares de a: " + impares(a));
+    System.out.println("impares de b: " + impares(b));
+    System.out.println("impares de c: " + impares(c));
+    System.out.println("impares de d: " + impares(d));
+    System.out.println("impares de e: " + impares(e));
+    System.out.println("pares de a: " + pares(a));
+    System.out.println("pares de b: " + pares(b));
+    System.out.println("pares de c: " + pares(c));
+    System.out.println("pares de d: " + pares(d));
+    System.out.println("pares de e: " + pares(e));
+  }
+  
+  public static No impares(No l) {
+    if (vazia(l)) return null;
+    
+    if ((car(l) % 2) != 0) return cons(car(l), impares(cdr(l)));
+    
+    return impares(cdr(l));
+  }
+  
+  public static No pares(No l) {
+    if (vazia(l)) return null;
+    
+    if ((car(l) % 2) == 0) return cons(car(l), pares(cdr(l)));
+    
+    return pares(cdr(l));
   }
   
   public static boolean vazia(No l) {
@@ -81,12 +137,12 @@ class LispLike {
   
   public static boolean contem(No a, No b) {
     if (vazia(b)) return true;
-    if (perntecen(car(b), a)) return contem(a, cdr(b));
+    if (pertence(car(b), a)) return contem(a, cdr(b));
     return false;
   }
   
   public static No removeTodas(int x, No l) {
-    if (vazia(x)) return null;
+    if (vazia(l)) return null;
     
     if (x == car(l)) return removeTodas(x, cdr(l));
     
@@ -101,11 +157,11 @@ class LispLike {
   
   public static No inverte(No l) {
     if (vazia(l)) return null;
-    return insereNoFinal(inverte(cdr(l), car(l)));
+    return insereNoFinal(car(l), inverte(cdr(l)));
   }
   
-  public static No insereNoFinal(No l, int x) {
-    if (vazia(l)) retunr cons(x, null);
-    return cons(car(l), insereNoFinal(cdr(l), x));
+  public static No insereNoFinal(int x, No l) {
+    if (vazia(l)) return cons(x, null);
+    return cons(car(l), insereNoFinal(x, cdr(l)));
   }
 }
