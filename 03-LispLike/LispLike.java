@@ -6,7 +6,7 @@ class LispLike {
     No c = null;
     No d = cons(13, cons(25, null));
     No e = cons(13, a);
-   
+    
     System.out.println("a: " + a);
     System.out.println("b: " + b);
     System.out.println("c: " + c);
@@ -44,6 +44,35 @@ class LispLike {
     System.out.println("pares de c: " + pares(c));
     System.out.println("pares de d: " + pares(d));
     System.out.println("pares de e: " + pares(e));
+    System.out.println("a append b:     " + append(a, b));
+    System.out.println("a meu_append b: " + meu_append(a, b));
+    System.out.println("fatorial de cada elemento da lista: FAZER! ");
+  }
+  
+  public static No meu_append(No a, No b) {
+    No ultimo = ultimo(a);
+    if (vazia(ultimo)) return b;
+    ultimo.proximo = b;
+    return a;
+  }
+  
+  public static No ultimo(No a) {
+    if (vazia(a)) return null;
+    if (cdr(a) == null) return a;
+    return ultimo(cdr(a));
+  }
+  
+  public static No append(No a, No b) {
+    if (vazia(a)) return b;
+    return cons(car(a), append(cdr(a), b));
+  }
+  
+  public static No mistura(No a, No b) {
+    if (vazia(a)) return b;
+    if (vazia(b)) return a;
+    if (car(a) < car(b)) return cons(car(a), mistura(cdr(a), b));
+    
+    return cons(car(b), mistura(a, cdr(b)));
   }
   
   public static No impares(No l) {
