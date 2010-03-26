@@ -94,8 +94,24 @@ class ListaOrdenadaDeCarros {
     return true;
   }
   
-  public static void consultar(Carro c) {
+  public boolean consultar(Carro c) {
+    if (l == null || c.placa.compareTo(l.info.placa) < 0) {
+      return false;
+    }
     
+    ListaDeCarros aux = l;
+    
+    while (aux != null && aux.info.placa.compareTo(c.placa) < 0) {
+      aux = aux.prox;
+    }
+    
+    if (aux == null || aux.info.placa.compareTo(c.placa) > 0) {
+      return false;
+    }
+    
+    c.marca = aux.info.marca;
+    c.modelo = aux.info.modelo;
+    return true;
   }
   
   public String toString(){
