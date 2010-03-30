@@ -14,7 +14,7 @@ class DirectAccessFile {
     filename = f;
   }
     
-  public void load_for(String mode) {
+  public void open_for(String mode) {
     try {
       file = new RandomAccessFile(filename, mode);
     } catch (Exception e) {
@@ -23,9 +23,8 @@ class DirectAccessFile {
   }
   
   public void create() {
-    load_for("rw");
-    
     try {
+      open_for("rw");
       for (int i = 10; i >= 0; i--) file.writeInt(i);
       file.close();
     } catch (Exception e) {
@@ -34,9 +33,8 @@ class DirectAccessFile {
   }
   
   public void read() {
-    load_for("r");
-    
     try {
+      open_for("r");
       while (file.getFilePointer() < file.length()) System.out.println(file.readInt());
       file.close();
     } catch (Exception e) {
