@@ -1,11 +1,11 @@
 class Palindrome {
   public static void main(String[] args) {
-    palindrome("wow");
-    palindrome("wowwow");
-    palindrome("wwwwwooooo");
-    palindrome("sfsdnjhkhlh");
-    palindrome("woww");
-    palindrome("ababa");
+    // palindrome("wow");
+    // palindrome("wowwow");
+    // palindrome("wwwwwooooo");
+    // palindrome("sfsdnjhkhlh");
+    // palindrome("woww");
+    // palindrome("ababa");
     
     System.out.println(palindromeRecursivo("wow"));
     System.out.println(palindromeRecursivo("wowwow"));
@@ -36,8 +36,4 @@ class Palindrome {
     
     return true && palindromeRecursivo(palavra.substring(1, palavra.length()-1));
   }
-  
-  // public static void subPalindrome(String palavra) {
-    
-  // }
 }
