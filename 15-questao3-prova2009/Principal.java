@@ -21,7 +21,7 @@ class Principal {
     No inicio = null, temp;
     
     for (int i = totalDeProdutos; i > 0; i--) {
-      temp = new No(new Produto((int)(Math.random()*10), i, i));
+      temp = new No(new Produto((int)(Math.random()*10), (Math.random()*100), (Math.random()*100)));
       temp.prox = inicio;
       inicio = temp;
     }
@@ -68,7 +68,7 @@ class Principal {
       }
     }  
   }
-
+  
   public static void mostra(No lista) {
     while (lista != null) {
       System.out.print("[" + lista.info.cod + " - " + lista.info.qtd + "] ");
