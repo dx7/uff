@@ -22,6 +22,9 @@ class Q2 {
       r.seek(n*4);
       r.writeInt(qtd+1);
     }
+    
+    r.close();
+    s.close();
   }
   
   // métodos de teste
