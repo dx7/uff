@@ -10,9 +10,11 @@ elit
 sed
 do
 eiusmod
+eiusmod
 tempor
 tempor
 incididunt
+do
 ut
 labore
 et
@@ -37,6 +39,8 @@ tempor
 incididunt
 ut
 labore
+et
+et
 et
 dolore
 magna
