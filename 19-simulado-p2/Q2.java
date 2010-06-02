@@ -2,35 +2,57 @@ import java.io.*;
 import java.util.*;
 
 class Q2 {
-  // supondo que o arquivo terá apenas inteiros positivos
   public static void contar() throws Exception {
-    RandomAccessFile r = new RandomAccessFile("Q2-arquivo-de-contagem.bin", "rw");
     Scanner s = new Scanner(new File("Q2-arquivo-de-numeros.txt"));
     
-    r.setLength(0);
+    while (s.hasNextInt()) inserir(s.nextInt());
     
-    while (s.hasNextInt()) {
-      int n = s.nextInt();
-      
-      r.seek(n*4);
-      
-      int qtd = 0;
-      if (r.getFilePointer() < r.length()) {
-        qtd = (int) r.readInt();
-      }
-      
-      r.seek(n*4);
-      r.writeInt(qtd+1);
+    s.close();
+  }
+  
+  private static long achar(int n) throws Exception {
+    RandomAccessFile r = new RandomAccessFile("Q2-arquivo-de-contagem.bin", "r");
+    long pos = -1;
+    
+    for (long i = 0; i < r.length() && pos == -1; i += 8) {
+      r.seek(i);
+      if (r.readInt() == n) pos = i;
     }
     
     r.close();
-    s.close();
+    return pos;
+  }
+  
+  private static void inserir(int n) throws Exception {
+    RandomAccessFile r = new RandomAccessFile("Q2-arquivo-de-contagem.bin", "rw");
+    
+    long pos = achar(n);
+    
+    if (pos == -1) { // nao foi encontrado, add no final
+      r.seek(r.length());
+      r.writeInt(n);
+      r.writeInt(1);
+    } else { // foi encontrado. add mais uma ocorrencia.
+      r.seek(pos + 4);
+      int ocorrencias = r.readInt() + 1;
+      r.seek(pos + 4);
+      r.writeInt(ocorrencias);
+    }
+    
+    r.close();
   }
   
   // métodos de teste
   public static void main(String[] args) throws Exception {
+    zerar();
     contar();
     mostrar();
+  }
+  
+  public static void zerar() throws Exception {
+    RandomAccessFile f = new RandomAccessFile("Q2-arquivo-de-contagem.bin", "rw");
+    f.setLength(0);
+    f.close();
   }
   
   public static void mostrar() throws Exception {
@@ -38,7 +60,7 @@ class Q2 {
     f.seek(0);
     
     while (f.getFilePointer() < f.length()) {
-      System.out.println(f.getFilePointer()/4 + ": " + f.readInt() + "x");
+      System.out.println(f.readInt() + ": " + f.readInt() + "x");
     }
     
     System.out.println();
