@@ -14,138 +14,105 @@ public class Q3 {
     nova.prox = l;
     return nova;
   }
-
-  public static void mostra(No l) {
-    No aux = l;
   
-    while (aux != null) {
-      System.out.print(car(aux) + " ");
-      aux = cdr(aux);
-    }
-  
-    System.out.println();
-  }
-
-  public static No insereOrdenado(int x, No l) {
-    if (l == null || x < car(l)) return cons(x, l);
+  public static No impares(No l) {
+    if (l == null) return null;
     
-    return cons(car(l), insereOrdenado(x, cdr(l)));
+    if (car(l) % 2 != 0) return cons(car(l), impares(cdr(l)));
+    
+    return impares(cdr(l));
   }
-
+  
+  public static No pares(No l) {
+    if (l == null) return null;
+    
+    if (car(l) % 2 == 0) return cons(car(l), pares(cdr(l)));
+    
+    return pares(cdr(l));
+  }
+  
   public static No inverter(No l) {
     if (l == null) return null;
-
-    return insereNoFinal(inverter(cdr(l)), car(l));
-  }
-
-  public static No insereNoFinal(No l, int x) {
-    if (l == null) return cons(x, null);
     
-    return cons(car(l), insereNoFinal(cdr(l), x));
-  }
-
-  public static boolean par(int x) {
-    return x % 2 == 0;
-  }
-
-  public static No listaDeImpares(No l) {
-    if (l == null) return null;
-    
-    if (par(car(l))) return listaDeImpares(cdr(l));
-    
-    return cons(car(l), listaDeImpares(cdr(l)));
-  }
-
-  public static No listaDePares(No l) {
-    if (l == null) return null;
-    
-    if (par(car(l))) return cons(car(l), listaDePares(cdr(l)));
-    
-    return listaDePares(cdr(l));
+    return inserirNoFinal(car(l), inverter(cdr(l)));
   }
   
-  public static No ordena(No l){
+  public static No inserirNoFinal(int x, No l) {
+    if (l == null) return cons(x, null);
+    
+    return cons(car(l), inserirNoFinal(x, cdr(l)));
+  }
+  
+  public static No inserirOrdenado(int x, No l) {
+    if (l == null) return cons(x, null);
+    
+    if (x <= car(l)) return cons(x, l);
+    
+    return cons(car(l), inserirOrdenado(x, cdr(l)));
+  }
+  
+  public static No ordenar(No l) {
     if (l == null) return null;
     
-    return insereOrdenado(car(l), ordena(cdr(l)));
+    return inserirOrdenado(car(l), ordenar(cdr(l)));
+  }
+  
+  public static No unir(No a, No b) {
+    if (a == null) return b;
+    
+    return inserirOrdenado(car(a), unir(cdr(a), b));
+  }
+  
+  public static int escalar(No a, No b) {
+    if (a == null || b == null || a.length() != b.length()) return 0;
+    
+    return escalar(cdr(a), cdr(b)) + car(a) * car(b);
   }
 
-  public static boolean pertence(int x, No l){
-    if (l == null) return false;
-
-    if (x == car(l)) return true;
-
-    return pertence(x,cdr(l));
-  }
-
-  public static No uniao(No l1, No l2){
-    if (l1 == null) return l2;
-
-    if (pertence (car(l1),l2)) return uniao(cdr(l1),l2);
-
-    return cons(car(l1),uniao(cdr(l1),l2));
-  }
-
-  public static int somaEMult(int x1, int x2){
-    return x1*x2;
-  }
-
-  public static int produtoEscalar(No l1, No l2){
-    if (l1 == null) return 0;
-
-    if (l2 == null) return 0;
-
-    return (produtoEscalar(cdr(l1), cdr(l2)) + somaEMult(car(l1), car(l2)));
-  }
-
-  public static void main(String args[]){
-
-    System.out.println("Lista 1: ");
-    No lista = cons(1, cons(2, cons(3, cons(4, null))));
-    mostra(lista);
+  public static void main(String[] args) {
+    No l1 = cons(4, cons(5, cons( 2, cons(1, cons(0, cons(3, null))))));
+    No l2 = cons(5, cons(7, cons( 6, cons(8, cons(9, cons(4, null))))));
     
-    System.out.println("Lista 2: ");
-    No listadois = cons(1, cons(2, cons(7, cons(3, null))));
-    mostra(listadois);
-
-    //------ Invertendo a Lista ---- //
-
-    System.out.println("Lista 1 INVERTIDA: ");
-    No lista2 = inverter(lista);
-    mostra(lista2);
+    System.out.println("Listas: ");
+    l1.mostrar();
+    l2.mostrar();
     
-    System.out.println("Lista 1 IMPARES: ");
-    No listaImpr = listaDeImpares(lista);
-    mostra(listaImpr);
+    System.out.println("Tamanho das listas: ");
+    System.out.println(l1.length());
+    System.out.println(l2.length());
     
-    System.out.println("Lista 1 IMPARES INVERTIDA: ");
-    No lista3 = inverter(listaImpr);
-    mostra(lista3);
+    System.out.println("Listas invertidas: ");
+    inverter(l1).mostrar();
+    inverter(l2).mostrar();
     
-    System.out.println("Lista 1 PARES: ");
-    No listaPar = listaDePares(lista);
-    mostra(listaPar);
-
-    // ------ordenando duas listas ------ //
-
-    System.out.println("Lista 1 ORDENADA: ");
-    No l1 = ordena(lista);
-    mostra(l1);
+    System.out.println("Ímpares: ");
+    impares(l1).mostrar();
+    impares(l2).mostrar();
     
-    System.out.println("Lista 2 ORDENADA: ");
-    No l2 = ordena(listadois);
-    mostra(l2);
-
-    System.out.println("Uniao ordenada das 2 listas: ");
-    No l3 = uniao(l1,l2);
-    No l4 = ordena(l3);
-    mostra(l4);
-
-    //----Produto Escalar---//
-
+    System.out.println("Ímpares invertidos: ");
+    inverter(impares(l1)).mostrar();
+    inverter(impares(l2)).mostrar();
+    
+    System.out.println("Pares: ");
+    pares(l1).mostrar();
+    pares(l2).mostrar();
+    
+    System.out.println("Adicionado ordenadamente -1 e 10 nas listas: ");
+    inserirOrdenado(10, inserirOrdenado(-1, l1)).mostrar();
+    inserirOrdenado(10, inserirOrdenado(-1, l2)).mostrar();
+    
+    System.out.println("Listas ordenadas: ");
+    ordenar(l1).mostrar();
+    ordenar(l2).mostrar();
+    
+    System.out.println("União das listas ordenadas: ");
+    unir(ordenar(l1), ordenar(l2)).mostrar();
+    
     System.out.println("Produto escalar das listas: ");
-    int l5 = produtoEscalar(lista, listadois);
-    System.out.println(l5);
+    System.out.println(escalar(l1, l2));
+    
+    System.out.println("Produto escalar de listas de tamanhos diferentes: ");
+    System.out.println(escalar(l1, inserirOrdenado(-1, l2)));
   }
 }
 
@@ -155,6 +122,19 @@ class No {
 
   public No(int i) {
     info = i;
-    prox = null;
+  }
+  
+  public String toString() {
+    if (prox == null) return String.valueOf(info);
+    return info + " " + prox;
+  }
+  
+  public int length() {
+    if (prox == null) return 1;
+    return 1 + prox.length();
+  }
+  
+  public void mostrar() {
+    System.out.println(this);
   }
 }
