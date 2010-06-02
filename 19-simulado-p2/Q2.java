@@ -1,7 +1,7 @@
 import java.io.*;
 import java.util.*;
 
-class Q2 {
+public class Q2 {
   public static void contar() throws Exception {
     Scanner s = new Scanner(new File("Q2-arquivo-de-numeros.txt"));
     
@@ -10,7 +10,7 @@ class Q2 {
     s.close();
   }
   
-  private static long achar(int n) throws Exception {
+  public static long achar(int n) throws Exception {
     RandomAccessFile r = new RandomAccessFile("Q2-arquivo-de-contagem.bin", "r");
     long pos = -1;
     
@@ -23,7 +23,7 @@ class Q2 {
     return pos;
   }
   
-  private static void inserir(int n) throws Exception {
+  public static void inserir(int n) throws Exception {
     RandomAccessFile r = new RandomAccessFile("Q2-arquivo-de-contagem.bin", "rw");
     
     long pos = achar(n);
