@@ -13,6 +13,18 @@ class Palindrome {
     System.out.println(palindromeRecursivo("sfsdnjhkhlh"));
     System.out.println(palindromeRecursivo("woww"));
     System.out.println(palindromeRecursivo("ababa"));
+    
+    substrings("abacaxi");
+  }
+  
+  public static void substrings(String p) {
+    for (int i = 0; i <= p.length(); i++) {
+      for (int j = i + 3; j <= p.length(); j++) {
+        if (palindromeRecursivo(p.substring(i, j))) {
+          System.out.println(p.substring(i, j));
+        }
+      }
+    }
   }
   
   public static void palindrome(String palavra) {

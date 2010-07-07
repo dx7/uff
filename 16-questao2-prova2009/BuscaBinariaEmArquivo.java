@@ -40,7 +40,7 @@ class BuscaBinariaEmArquivo {
     long fim = f.length();
     boolean achou = false;
     
-    while (inicio < fim-8 && !achou) {
+    while (inicio < fim - 8 && !achou) {
       long meio = (long) ((((fim - inicio)/8)/2)*8)+inicio;
       f.seek(meio);
       
