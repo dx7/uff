@@ -2,7 +2,12 @@
 #include <stdlib.h>
 #include <string.h>
 #include <math.h>
+
 #define MAX 50
+
+/*
+ * Alunos: Cristian e Rafael Carvalho
+ */
 
 int main ()
 {
