@@ -2,4 +2,6 @@ h1. Trabalho de Estrutura de Dados I
 
 h2. UFF - Professora Aline
 
+h3. Alunos: Cristian e Rafael Carvalho
+
 O trabalho consiste em avaliar uma string que contém uma expressão aritmética pós-fixada.
