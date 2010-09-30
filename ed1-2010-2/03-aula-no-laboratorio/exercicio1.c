@@ -12,22 +12,33 @@ lista *l;
 
 int main (int argc, char const *argv[])
 {
-	lista *achado;
+	lista *aux;
 	
 	l = (lista*) malloc(sizeof(lista)); // nó cabeça
 	l->info = -9999;
 	l->prox = NULL;
 	
 	adicionar(0);
+	adicionar(1);
+	adicionar(2);
 	mostrar();
-	achado = buscar(0);
-	// printf("%d\n", achado->info);
+	
+	// aux = buscar(0); // comentando essa linha compila
+	
+	if(aux == NULL)
+	{
+		printf("Não encontrado.\n");
+	}
+	else
+	{
+		printf("%d\n", aux->info);
+	}
 	
 	printf("%s\n", "Tudo ok até aqui!");
 	return 0;
 }
 
-adicionar(int n)
+int adicionar(int n)
 {
 	lista *aux = (lista*) malloc(sizeof(lista));
 
@@ -36,7 +47,7 @@ adicionar(int n)
 	l->prox = aux;
 }
 
-mostrar()
+int mostrar()
 {
 	lista *aux = l->prox;
 	
@@ -65,30 +76,3 @@ lista* buscar(int n)
 	
 	return aux;
 }
-
-// exemplo
-// 
-// 	l = (lista*) malloc(sizeof(lista)); // nó cabeça
-// 	
-// 	l->info = -9999;
-// 	l->prox = NULL;
-// 	
-// 	printf("%d\n", l->info);
-// 	
-// 	m = (lista*) malloc(sizeof(lista));
-// 	
-// 	m->info = -9998;
-// 	m->prox = l;
-// 	
-// 	int a = 9;
-// 	int *p;
-// 	p = &a;
-// 	
-// 	printf("%d\n", *p);
-// 	
-// 	*p = a;
-// 	printf("%d\n", *p);
-// 	
-// 	printf("%d\n", m->info);
-// 	
-// 	printf("%d\n", m->prox->info);
