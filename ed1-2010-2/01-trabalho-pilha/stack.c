@@ -36,17 +36,25 @@ int avalia(char pos[])
 			op2 = pop(&stack, &top);
 			op1 = pop(&stack, &top);
 
-			if(pos[i] == '+') result = op1 + op2;
-			else if(pos[i] == '-') result = op1 - op2;
-			else if(pos[i] == '*') result = op1 * op2;
-			else if(pos[i] == '/') result = op1 / op2;
-			else if(pos[i] == '$') result = pow(op1, op2);
+			result = (int) eval2(op1, op2, pos[i]);
 
 			push(&stack, &top, result);
 		}
 	}
 	
 	result = pop(&stack, &top);
+	
+	return result;
+}
+
+int eval2(int op1, int op2, char sinal) {
+	int result;
+	
+	if(sinal == '+') result = op1 + op2;
+	else if(sinal == '-') result = op1 - op2;
+	else if(sinal == '*') result = op1 * op2;
+	else if(sinal == '/') result = op1 / op2;
+	else if(sinal == '$') result = pow(op1, op2);
 	
 	return result;
 }
