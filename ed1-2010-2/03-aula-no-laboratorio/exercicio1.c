@@ -10,34 +10,6 @@ typedef struct no lista;
 
 lista *l;
 
-int main (int argc, char const *argv[])
-{
-	lista *aux;
-	
-	l = (lista*) malloc(sizeof(lista)); // nó cabeça
-	l->info = -9999;
-	l->prox = NULL;
-	
-	adicionar(0);
-	adicionar(1);
-	adicionar(2);
-	mostrar();
-	
-	// aux = buscar(0); // comentando essa linha compila
-	
-	if(aux == NULL)
-	{
-		printf("Não encontrado.\n");
-	}
-	else
-	{
-		printf("%d\n", aux->info);
-	}
-	
-	printf("%s\n", "Tudo ok até aqui!");
-	return 0;
-}
-
 int adicionar(int n)
 {
 	lista *aux = (lista*) malloc(sizeof(lista));
@@ -75,4 +47,32 @@ lista* buscar(int n)
 	}
 	
 	return aux;
+}
+
+int main (int argc, char const *argv[])
+{
+	lista *aux;
+	
+	l = (lista*) malloc(sizeof(lista)); // nó cabeça
+	l->info = -9999;
+	l->prox = NULL;
+	
+	adicionar(0);
+	adicionar(1);
+	adicionar(2);
+	mostrar();
+	
+  aux = buscar(0); // comentando essa linha compila
+	
+	if(aux == NULL)
+	{
+		printf("Não encontrado.\n");
+	}
+	else
+	{
+		printf("%d\n", aux->info);
+	}
+	
+	printf("%s\n", "Tudo ok até aqui!");
+	return 0;
 }
